@@ -84,7 +84,20 @@ INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType, Inverse) VAL
 -- Rough Rider ability to +5 (from +10)
 UPDATE ModifierArguments SET Value='5' WHERE ModifierId='ROUGH_RIDER_BONUS_ON_HILLS' AND Name='Amount';
 
---==================
+BBG_PLAYER_IS_IN_ERA_CLASSICAL_REQUIREMENTS
+BBG_PLAYER_IS_IN_ERA_MEDIEVAL_REQUIREMENTS
+BBG_PLAYER_IS_IN_ERA_RENAISSANCE_REQUIREMENTS
+BBG_PLAYER_IS_IN_ERA_INDUSTRIAL_REQUIREMENTS
+
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES
+	('TRAIT_COMBAT_BONUS_PER_ERA', 'MODIFIER_PLAYER_UNITS_ADJUST_COMBAT_STRENGTH', 'BBG_PLAYER_IS_IN_ERA_ANCIENT_REQUIREMENTS');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
+	('TRAIT_COMBAT_BONUS_PER_ERA', 'ModifierId', 'BBG_COMBAT_BONUS_ANCIENT_ERA'),
+	('BBG_COMBAT_BONUS_ANCIENT_ERA', 'Amount', '1');
+INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId) VALUES
+	('TRAIT_LEADER_ROOSEVELT_COROLLARY', 'TRAIT_COMBAT_BONUS_PER_ERA');	
+
+--==================	
 -- Arabia
 --==================
 -- Arabia's Worship Building Bonus increased from 10% to 20%
